@@ -13,9 +13,8 @@ class Ground {
         this.height = 20;
     }
 
-    draw(ctx) {
-        ctx.fillStyle = 'green';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+    draw(ctx, sprite) {
+        ctx.drawImage(sprite, this.x, this.y, this.width, this.height);
     }
 }
 
@@ -107,8 +106,10 @@ for(let key in sprites){
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Draw the background
+    ctx.drawImage(sprites.background, 0, 0, canvas.width, canvas.height);
+
     platforms.forEach(p => p.x -= gameSpeed);
-    
     collectibles.forEach(c => c.x -= gameSpeed);
 
     platforms = platforms.filter(p => p.x + p.width > 0);
@@ -118,10 +119,13 @@ function gameLoop() {
         generatePlatform();
     }
 
-    ground.draw(ctx);
+    // Draw the ground using the ground sprite
+    ground.draw(ctx, sprites.ground);
 
-    ctx.fillStyle = 'brown';
-    platforms.forEach(p => ctx.fillRect(p.x, p.y, p.width, p.height));
+    // Draw platforms using the platform sprite
+    platforms.forEach(p => {
+        ctx.drawImage(sprites.platform, p.x, p.y, p.width, p.height);
+    });
 
     collectibles.forEach(c => {
         if (c.checkCollision(player)) {
@@ -138,5 +142,3 @@ function gameLoop() {
 
     requestAnimationFrame(gameLoop);
 }
-
-// gameLoop();
