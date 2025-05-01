@@ -75,10 +75,10 @@ const sprites = {
 }
 
 // set the source image for each sprite
-sprites.player.src = '../assets/player.png';
-sprites.platform.src = '../assets/platform.png';
-sprites.ground.src = '../assets/ground.png';
-sprites.background.src = '../assets/background.png';
+sprites.player.src = 'assets/player.png';
+sprites.platform.src = 'assets/platform.png';
+sprites.ground.src = 'assets/ground.png';
+sprites.background.src = 'assets/background.png';
 
 // variable to track the number of images loaded
 let imagesLoaded = 0;
